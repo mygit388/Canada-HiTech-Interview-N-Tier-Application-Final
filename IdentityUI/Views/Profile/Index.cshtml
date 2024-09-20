@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Interview.Model.ProfileModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["InfoMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+<p>
+    @Html.ActionLink("Create New Profile", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProfileId }, new { @class = "btn btn-success" })&nbsp;&nbsp;
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProfileId }, new { @class = "btn btn-danger" }) &nbsp;&nbsp;
+                @Html.ActionLink("Manage Tasks", "Index", "Task", new { profileId = item.ProfileId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

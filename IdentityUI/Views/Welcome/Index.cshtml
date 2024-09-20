@@ -1,0 +1,21 @@
+﻿<!-- Views/Welcome/Index.cshtml -->
+@{
+    ViewBag.Title = "Welcome";
+    var refreshToken = TempData["RefreshToken"] as string;
+    var tokenExpiry = TempData["AccessTokenExpiry"] as string;
+}
+
+<h2>Welcome</h2>
+
+@section scripts {
+    @if (!string.IsNullOrEmpty(refreshToken) && !string.IsNullOrEmpty(tokenExpiry))
+    {
+        <script>
+            const refreshToken = '@refreshToken';
+            const tokenExpiry = new Date('@tokenExpiry').getTime();
+
+            // Call storeTokens function to save tokens in local storage
+            storeTokens(refreshToken, (tokenExpiry - Date.now()) / 1000);
+        </script>
+    }
+}
